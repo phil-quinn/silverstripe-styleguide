@@ -4,7 +4,7 @@
  *
  * @package StyleGuide
  */
-class StyleGuideController extends ContentController {
+class StyleGuideController extends Page_Controller {
 
 	/**
      * @var StyleGuide service
