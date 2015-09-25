@@ -111,6 +111,11 @@ class StyleGuideController extends Page_Controller {
 	 * Set the styleguides css and js requirements.
 	 */
 	public function setRequirements() {
+		// styleguide requirements (bring in first so theme styles can overwrite)
+		Requirements::css(STYLEGUIDE_BASE . '/dist/css/screen.css');
+		Requirements::javascript(STYLEGUIDE_BASE . '/dist/js/core.js');
+		Requirements::javascript('//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert');
+
 		// theme requirements
 		if($files = $this->config()->css_files) {
 			foreach($files as $file) {
@@ -124,10 +129,6 @@ class StyleGuideController extends Page_Controller {
 			}
 		}
 
-		// styleguide requirements
-		Requirements::css(STYLEGUIDE_BASE . '/dist/css/screen.css');
-		Requirements::javascript(STYLEGUIDE_BASE . '/dist/js/core.js');
-		Requirements::javascript('//google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert');
 	}
 
 	/**
