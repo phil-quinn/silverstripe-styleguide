@@ -4,7 +4,7 @@
  *
  * @package StyleGuide
  */
-class StyleGuideController extends Page_Controller {
+class StyleGuideController extends Page_Controller implements PermissionProvider {
 
 	/**
      * @var StyleGuide service
@@ -43,6 +43,9 @@ class StyleGuideController extends Page_Controller {
 
 	public function init() {
 		parent::init();
+		if(!Permission::check("VIEW_STYLEGUIDE")) {
+			Security::permissionFailure();
+		}
 
 		if(!$this->config()->service) {
 			$this->httpError(404);
@@ -84,6 +87,13 @@ class StyleGuideController extends Page_Controller {
 		}
 		return $this->renderWith(array('StyleGuideController'));
 	}
+
+	public function providePermissions() {
+		return array(
+			"VIEW_STYLEGUIDE" => "View the style guide",
+		);
+	}
+
 
 	/**
 	 * Set the styleguide service on init.
